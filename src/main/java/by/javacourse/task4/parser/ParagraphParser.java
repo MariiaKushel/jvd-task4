@@ -11,7 +11,7 @@ public class ParagraphParser implements AbstractTextParser {
 
 	static Logger logger = LogManager.getLogger();
 
-	private static final String PARAGRAPH_SPLITTER_REGEX = "(\u0009|(\u0020{4}))";
+	private static final String PARAGRAPH_SPLITTER_REGEX = "(\u0009)|(\u0020{4})";
 
 	@Override
 	public void parse(TextComponent component, String data) {
