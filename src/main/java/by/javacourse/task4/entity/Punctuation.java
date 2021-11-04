@@ -1,5 +1,7 @@
 package by.javacourse.task4.entity;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -7,32 +9,39 @@ public class Punctuation implements TextComponent{
 
 	static Logger logger = LogManager.getLogger();
 	
-	private char punctuation;
+	private char punct;
 	
 	public Punctuation (char punctuation) {
-		this.punctuation = punctuation;
+		this.punct = punctuation;
 	}
 	
-	public String createViewForm() {
-		return String.valueOf(punctuation);
-	}
-
 	public boolean add(TextComponent component) {
-		logger.info("Not available to this component");
-		return false;
+		logger.info("Not available operation to this component");
+		throw new UnsupportedOperationException("Not available operation to this component");
 	}
 
 	public boolean remove(TextComponent component) {
-		logger.info("Not available to this component");
-		return false;
+		logger.info("Not available operation to this component");
+		throw new UnsupportedOperationException("Not available operation to this component");
 	}
 
-	public String toString () {
-		return new StringBuilder()
-				.append("[punctuation=")
-				.append(punctuation)
-				.append("]")
-				.toString();
+	@Override
+	public List<TextComponent> getChildren() {
+		logger.info("Not available operation to this component");
+		throw new UnsupportedOperationException("Not available operation to this component");
 	}
+	
+	@Override
+	public String toString () {
+		return String.valueOf(punct);
+	}
+
+	@Override
+	public TextComponent getChildByIndex(int index) {
+		
+		return null;
+	}
+
+	
 	
 }

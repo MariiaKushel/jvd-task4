@@ -3,21 +3,19 @@ package by.javacourse.task4.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import by.javacourse.task4.entity.Punctuation;
 import by.javacourse.task4.entity.TextComponent;
 import by.javacourse.task4.entity.TextComponentType;
 import by.javacourse.task4.entity.TextComposite;
 
-public class WordAndPunctuationParser implements AbstractTextParser {
+public class WordAndPunctuationParser extends AbstractTextParser {
 
-	static Logger logger = LogManager.getLogger();
+	private static final String WORD_REGEX = "[\\wа-яА-ЯёЁ]+";
+	private static final String WORD_OR_PUNCTUATION_REGEX = "([\\wа-яА-ЯёЁ]+)|(\\p{Punct})";
 
-	private static final String WORD_REGEX = "[a-zA-Zа-яА-ЯёЁ]+";
-
-	private static final String WORD_OR_PUNCTUATION_REGEX = "([a-zA-Zа-яА-ЯёЁ]+)|(\\p{Punct})";
+	public WordAndPunctuationParser() {
+		this.nextParser = new LetterParser();
+	}
 
 	@Override
 	public void parse(TextComponent component, String data) {
@@ -26,18 +24,17 @@ public class WordAndPunctuationParser implements AbstractTextParser {
 		Matcher matcher = pattern.matcher(data);
 
 		while (matcher.find()) {
-			String part = matcher.group();
+			String group = matcher.group();
 
 			Pattern wordPattren = Pattern.compile(WORD_REGEX);
-			Matcher wordMatcher = wordPattren.matcher(part);
+			Matcher wordMatcher = wordPattren.matcher(group);
 
 			if (wordMatcher.matches()) {
 				TextComponent wordComponent = new TextComposite(TextComponentType.WORD);
 				component.add(wordComponent);
-				LetterParser parser = new LetterParser();
-				parser.parse(wordComponent, part);
+				nextParser.parse(wordComponent, group);
 			} else {
-				TextComponent punctuationComponent = new Punctuation(part.charAt(0));
+				TextComponent punctuationComponent = new Punctuation(group.charAt(0));
 				component.add(punctuationComponent);
 			}
 		}

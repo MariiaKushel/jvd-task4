@@ -3,9 +3,9 @@ package by.javacourse.task4.entity;
 public enum TextComponentType {
 
 	TEXT("", ""), 
-	PARAGRAPH("\u0009", "\n"), 
+	PARAGRAPH("\t", "\n"), 
 	SENTENCE("", ""),
-	LEXSEM("", "\u0020"), 
+	LEXSEM("", " "), 
 	WORD("", "");
 
 	private final String prefix;

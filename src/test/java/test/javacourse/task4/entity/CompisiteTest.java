@@ -55,7 +55,7 @@ public class CompisiteTest {
 		text.add(paragraph2);
 		text.add(paragraph1);
 
-		String viewForm = text.createViewForm();
+		String viewForm = text.toString();
 		System.out.println(viewForm);
 
 	}

@@ -1,17 +1,16 @@
 package by.javacourse.task4.parser;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import by.javacourse.task4.entity.TextComponent;
 import by.javacourse.task4.entity.TextComponentType;
 import by.javacourse.task4.entity.TextComposite;
 
-public class ParagraphParser implements AbstractTextParser {
+public class ParagraphParser extends AbstractTextParser {
 
-	static Logger logger = LogManager.getLogger();
+	private static final String PARAGRAPH_SPLITTER_REGEX = "(?m)(?=^((\\t)|(\\s{4})))";
 
-	private static final String PARAGRAPH_SPLITTER_REGEX = "(\u0009)|(\u0020{4})";
+	public ParagraphParser() {
+		this.nextParser = new SentenceParser();
+	}
 
 	@Override
 	public void parse(TextComponent component, String data) {
@@ -20,8 +19,7 @@ public class ParagraphParser implements AbstractTextParser {
 		for (String paragraph : paragraphs) {
 			TextComponent paragraphComponent = new TextComposite(TextComponentType.PARAGRAPH);
 			component.add(paragraphComponent);
-			SentenceParser parser = new SentenceParser();
-			parser.parse(paragraphComponent, paragraph);
+			nextParser.parse(paragraphComponent, paragraph);
 		}
 	}
 

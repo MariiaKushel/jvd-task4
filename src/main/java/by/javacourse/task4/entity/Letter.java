@@ -1,5 +1,7 @@
 package by.javacourse.task4.entity;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,27 +13,34 @@ public class Letter implements TextComponent{
 	public Letter (char letter) {
 		this.letter = letter;
 	}
-	
-	public String createViewForm() {
-		return String.valueOf(letter);
-	}
 
 	public boolean add(TextComponent component) {
-		logger.info("Not available to this component");
-		return false;
+		logger.info("Not available operation to this component");
+		throw new UnsupportedOperationException("Not available operation to this component");
 	}
 
 	public boolean remove(TextComponent component) {
-		logger.info("Not available to this component");
-		return false;
+		logger.info("Not available operation to this component");
+		throw new UnsupportedOperationException("Not available operation to this component");
 	}
 	
-	public String toString () {
-		return new StringBuilder()
-				.append("[letter=")
-				.append(letter)
-				.append("]")
-				.toString();
+	@Override
+	public List<TextComponent> getChildren() {
+		logger.info("Not available operation to this component");
+		throw new UnsupportedOperationException("Not available operation to this component");
 	}
+	
+	@Override
+	public String toString () {
+		return String.valueOf(letter);
+	}
+
+	@Override
+	public TextComponent getChildByIndex(int index) {
+		
+		return null;
+	}
+
+	
 
 }

@@ -1,11 +1,16 @@
 package by.javacourse.task4.entity;
 
-public interface TextComponent {
-	
-	String createViewForm();
-	
-	boolean add (TextComponent component);
-	
-	boolean remove (TextComponent component);
+import java.util.List;
 
+public interface TextComponent {
+
+	boolean add(TextComponent component);
+
+	boolean remove(TextComponent component);
+	
+	List<TextComponent> getChildren();
+	
+	TextComponent getChildByIndex(int index);
+
+	String toString(); // leading method
 }
