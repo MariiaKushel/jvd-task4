@@ -7,7 +7,7 @@ import by.javacourse.task4.entity.TextComposite;
 
 public interface TextService {
 
-	TextComponent sortParagraph(TextComponent text);
+	List<TextComponent> sortParagraph(TextComponent text);
 
 	List<TextComponent> findSentences(TextComponent text);
 

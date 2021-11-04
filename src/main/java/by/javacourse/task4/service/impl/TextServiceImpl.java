@@ -1,6 +1,7 @@
 package by.javacourse.task4.service.impl;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,13 +23,24 @@ public class TextServiceImpl implements TextService {
 	private static final String CONSONANT_REGEX = "(?iu)[a-zа-я&&[^aeiouyаеёионыэюя]]";
 
 	@Override
-	public TextComponent sortParagraph(TextComponent text) {
-
-		return null;
+	public List<TextComponent> sortParagraph(TextComponent text) {
+		
+		List<TextComponent> sortedParagraphs = text.getChildren();
+		
+		sortedParagraphs.sort(new Comparator <TextComponent> () {
+			public int compare(TextComponent one, TextComponent other) {
+				Integer sizeOne = one.getChildren().size();
+				Integer sizeOther = other.getChildren().size();
+				return sizeOne.compareTo(sizeOther);
+			}
+		});
+		
+		return sortedParagraphs;
 	}
 
 	@Override
 	public List<TextComponent> findSentences(TextComponent text) {
+	
 
 		return null;
 	}
