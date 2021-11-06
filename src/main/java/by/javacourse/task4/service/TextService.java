@@ -1,22 +1,29 @@
 package by.javacourse.task4.service;
 
 import java.util.List;
+import java.util.Map;
 
 import by.javacourse.task4.entity.TextComponent;
-import by.javacourse.task4.entity.TextComposite;
+import by.javacourse.task4.exception.TextException;
 
 public interface TextService {
 
-	List<TextComponent> sortParagraph(TextComponent text);
+	List<TextComponent> sortParagraphsByNumberOfSentences(TextComponent text) throws TextException;
 
-	List<TextComponent> findSentences(TextComponent text);
+	List<TextComponent> findSentencesWithLongestWorld(TextComponent text) throws TextException;
 
-	TextComposite removeSentences(TextComponent text, int numberOfWord);
+	void removeSentencesWithWordsLessThan(TextComponent text, int min) throws TextException;
 
-	long countSameWords();
+	Map<String, Integer> findAndCountSameWords(TextComponent text) throws TextException;
 
-	long countVowel(TextComponent text);
+	long countConsonant(TextComponent text) throws TextException;
 
-	long countConsonant(TextComponent text);
+	long countVowel(TextComponent text) throws TextException;
+	
+	//Other version of method using recursion
+	long countVowel2(TextComponent text); 
+	
+	//Other version of method without stream and recursion
+	long countVowel3(TextComponent text);
 
 }

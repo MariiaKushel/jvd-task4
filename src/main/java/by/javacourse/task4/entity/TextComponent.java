@@ -10,7 +10,7 @@ public interface TextComponent {
 	
 	List<TextComponent> getChildren();
 	
-	TextComponent getChildByIndex(int index);
+	TextComponent getChildByIndex(int index); //method used for testing
 
 	String toString(); // leading method
 }

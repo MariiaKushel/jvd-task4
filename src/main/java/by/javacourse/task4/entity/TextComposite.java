@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class TextComposite implements TextComponent {
+public class TextComposite implements TextComponent{
 
 	static Logger logger = LogManager.getLogger();
 
