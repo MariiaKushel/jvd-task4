@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.mockito.Mockito;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -31,7 +32,7 @@ public class TextServiceTest {
 		text = new TextComposite(TextComponentType.TEXT);
 		parser = new ParagraphParser();
 	}
-
+	
 	@Test
 	public void testSortParagraphsByNumberOfSentences() throws TextException {
 
