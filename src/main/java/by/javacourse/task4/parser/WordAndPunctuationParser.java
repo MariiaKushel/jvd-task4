@@ -11,7 +11,7 @@ import by.javacourse.task4.entity.TextComposite;
 public class WordAndPunctuationParser extends AbstractTextParser {
 
 	private static final String WORD_REGEX = "[\\wа-яА-ЯёЁ]+";
-	private static final String WORD_OR_PUNCTUATION_REGEX = "([\\wа-яА-ЯёЁ]+)|(\\p{Punct})";
+	private static final String WORD_OR_PUNCTUATION_REGEX = "([\\wа-яА-ЯёЁ]+)|([\\p{Punct}\u2026])"; // \\u2026 = '...'
 
 	public WordAndPunctuationParser() {
 		this.nextParser = new LetterParser();

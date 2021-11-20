@@ -37,10 +37,6 @@ public class TextComposite implements TextComponent {
 		return components.get(index);
 	}
 
-	public TextComponentType getType() {
-		return type;
-	}
-
 	@Override
 	public String toString() {
 
@@ -53,6 +49,38 @@ public class TextComposite implements TextComponent {
 		demonstrativeForm.append(type.getPostfix());
 
 		return demonstrativeForm.toString();
+	}
+
+	public TextComponentType getType() {
+		return type;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((components == null) ? 0 : components.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TextComposite other = (TextComposite) obj;
+		if (components == null) {
+			if (other.components != null)
+				return false;
+		} else if (!components.equals(other.components))
+			return false;
+		if (type != other.type)
+			return false;
+		return true;
 	}
 
 }

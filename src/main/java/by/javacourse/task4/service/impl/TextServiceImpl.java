@@ -29,7 +29,7 @@ public class TextServiceImpl implements TextService {
 	@Override
 	public List<TextComponent> sortParagraphsByNumberOfSentences(TextComponent text) throws TextException {
 
-		// suitable type of component TEXT
+		// suitable type of component is TEXT
 		if (!validateParameter(text)) {
 			throw new TextException("Unable type of TextComponent.");
 		}
@@ -43,14 +43,14 @@ public class TextServiceImpl implements TextService {
 				return sizeOne.compareTo(sizeOther);
 			}
 		});
-		
+				
 		return paragraphs;
 	}
 
 	@Override
 	public List<TextComponent> findSentencesWithLongestWorld(TextComponent text) throws TextException {
 
-		// suitable type of component TEXT
+		// suitable type of component is TEXT
 		if (!validateParameter(text)) {
 			throw new TextException("Unable type of TextComponent.");
 		}
@@ -86,11 +86,11 @@ public class TextServiceImpl implements TextService {
 	@Override
 	public void removeSentencesWithWordsLessThan(TextComponent text, int min) throws TextException{
 
-		// suitable type of component TEXT
+		// suitable type of component is TEXT
 		if (!validateParameter(text)) {
 			throw new TextException("Unable type of TextComponent.");
 		}
-
+		
 		for (TextComponent paragraph : text.getChildren()) {
 			for (TextComponent sentence : paragraph.getChildren()) {
 				int numberOfWord = 0;
@@ -108,7 +108,7 @@ public class TextServiceImpl implements TextService {
 
 	public Map<String, Integer> findAndCountSameWords(TextComponent text) throws TextException{
 
-		// suitable type of component TEXT
+		// suitable type of component is TEXT
 		if (!validateParameter(text)) {
 			throw new TextException("Unable type of TextComponent.");
 		}
@@ -116,7 +116,8 @@ public class TextServiceImpl implements TextService {
 		Map<String, Integer> sameWords = text.getChildren().stream()
 				.flatMap(p -> p.getChildren().stream())
 				.flatMap(s -> s.getChildren().stream())
-				.flatMap(lx -> lx.getChildren().stream().filter(w -> !(w instanceof Punctuation)))
+				.flatMap(lx -> lx.getChildren().stream())
+				.filter(w -> !(w instanceof Punctuation))
 				.map(w -> w.toString().toLowerCase())
 				.collect(Collectors.toMap(str -> str, i -> 1, (i1, i2) -> i1 + i2));
 
@@ -128,7 +129,7 @@ public class TextServiceImpl implements TextService {
 	@Override
 	public long countConsonant(TextComponent text) throws TextException{
 		
-		// suitable type of component TEXT PARAGRAPH SENTENCE LEXSEM WORD
+		// suitable type of component is TEXT
 		if (!validateParameter(text)) {
 			throw new TextException("Unable type of TextComponent.");
 		}
@@ -138,7 +139,8 @@ public class TextServiceImpl implements TextService {
 		long counter = text.getChildren().stream()
 				.flatMap(p -> p.getChildren().stream())
 				.flatMap(s -> s.getChildren().stream())
-				.flatMap(lx -> lx.getChildren().stream().filter(w -> !(w instanceof Punctuation)))
+				.flatMap(lx -> lx.getChildren().stream())
+				.filter(w -> !(w instanceof Punctuation))
 				.flatMap(w -> w.getChildren().stream())
 				.map(l -> l.toString())
 				.filter(l -> pattern.matcher(l).matches())
@@ -150,7 +152,7 @@ public class TextServiceImpl implements TextService {
 	@Override
 	public long countVowel(TextComponent text) throws TextException{
 
-		// suitable type of component TEXT PARAGRAPH SENTENCE LEXSEM WORD
+		// suitable type of component is TEXT
 		
 		if (!validateParameter(text)) {
 			throw new TextException("Unable type of TextComponent.");
@@ -161,7 +163,8 @@ public class TextServiceImpl implements TextService {
 		long counter = text.getChildren().stream()
 				.flatMap(p -> p.getChildren().stream())
 				.flatMap(s -> s.getChildren().stream())
-				.flatMap(lx -> lx.getChildren().stream().filter(w -> !(w instanceof Punctuation)))
+				.flatMap(lx -> lx.getChildren().stream())
+				.filter(w -> !(w instanceof Punctuation))
 				.flatMap(w -> w.getChildren().stream())
 				.map(l -> l.toString())
 				.filter(l -> pattern.matcher(l).matches())
@@ -170,9 +173,12 @@ public class TextServiceImpl implements TextService {
 		return counter;
 	}
 	
-	public long countVowel2(TextComponent text){
+	public long countVowel2(TextComponent text) throws TextException{
 
-		// work with any type of component
+		// work with any type of text composite
+		if (!(text instanceof TextComposite)) {
+			throw new TextException("Unable type of TextComponent.");
+		}
 		
 		Pattern pattern = Pattern.compile(VOWEL_REGEX);
 		long counter = 0L;
@@ -195,9 +201,12 @@ public class TextServiceImpl implements TextService {
 		return counter;
 	}
 
-	public long countVowel3(TextComponent text){
+	public long countVowel3(TextComponent text) throws TextException{
 
-		// work with any type of component
+		// work with any type of text composite
+		if (!(text instanceof TextComposite)) {
+			throw new TextException("Unable type of TextComponent.");
+		}
 		
 		Pattern pattern = Pattern.compile(VOWEL_REGEX);
 		long counter = 0L;

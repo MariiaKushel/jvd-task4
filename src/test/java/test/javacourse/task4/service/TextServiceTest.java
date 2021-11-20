@@ -5,10 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.mockito.Mockito;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import by.javacourse.task4.entity.TextComponent;
@@ -26,13 +25,13 @@ public class TextServiceTest {
 	private TextComponent text;
 	private AbstractTextParser parser;
 
-	@BeforeTest
+	@BeforeMethod
 	public void initialize() {
 		service = new TextServiceImpl();
 		text = new TextComposite(TextComponentType.TEXT);
 		parser = new ParagraphParser();
 	}
-	
+
 	@Test
 	public void testSortParagraphsByNumberOfSentences() throws TextException {
 
@@ -93,11 +92,25 @@ public class TextServiceTest {
 
 	@Test
 	public void testRemoveSentencesWithWordsLessThan() throws TextException {
+		String textAsString = "    Mama washed the frame.\n    Papa washed windows.\n	I washed windows too.";
+		parser.parse(text, textAsString);
+		
+		TextComponent expected = new TextComposite(TextComponentType.TEXT);
+		parser.parse(expected, textAsString);
+		TextComponent sentenceToRemove = expected.getChildByIndex(1).getChildByIndex(0);
+		expected.getChildByIndex(1).remove(sentenceToRemove);
+		
+		TextComponent actual = new TextComposite(TextComponentType.TEXT);
+		parser.parse(actual, textAsString);
 
+		service.removeSentencesWithWordsLessThan(actual, 4);
+		
+		Assert.assertEquals(actual, expected);
 	}
 
 	@Test
 	public void testFindAndCountSameWords() throws TextException {
+		
 		String textAsString = "    Mama washed the frame.\n    Papa washed windows.\n	I Washed windows too.";
 		parser.parse(text, textAsString);
 
@@ -111,10 +124,11 @@ public class TextServiceTest {
 
 	@Test(expectedExceptions = TextException.class)
 	public void testFindAndCountSameWordsException() throws TextException {
+		
 		String textAsString = "    Mama washed the frame.\n    Papa washed windows.\n	I Washed windows too.";
 		parser.parse(text, textAsString);
 		TextComponent paragraph = text.getChildByIndex(0);
-		
+
 		service.findAndCountSameWords(paragraph);
 	}
 
@@ -129,7 +143,7 @@ public class TextServiceTest {
 
 		Assert.assertEquals(actual, expected);
 	}
-	
+
 	@Test(expectedExceptions = TextException.class)
 	public void testCountConsonantException() throws TextException {
 
@@ -139,7 +153,7 @@ public class TextServiceTest {
 
 		service.countConsonant(paragraph);
 	}
-	
+
 	@Test
 	public void testCountVowel() throws TextException {
 
@@ -161,9 +175,9 @@ public class TextServiceTest {
 
 		service.countVowel(paragraph);
 	}
-	
+
 	@Test
-	public void testCountVowel2() {
+	public void testCountVowel2() throws TextException {
 
 		String textAsString = "    Mama washed the frame.\\n    Papa washed windowsЯ.";
 		parser.parse(text, textAsString);
@@ -173,9 +187,9 @@ public class TextServiceTest {
 
 		Assert.assertEquals(actual, expected);
 	}
-	
+
 	@Test
-	public void testCountVowel3() {
+	public void testCountVowel3() throws TextException {
 
 		String textAsString = "    Mama washed the frame.\\n    Papa washed windowsЯ.";
 		parser.parse(text, textAsString);
@@ -186,9 +200,7 @@ public class TextServiceTest {
 		Assert.assertEquals(actual, expected);
 	}
 
-	
-
-	@AfterTest
+	@AfterMethod
 	public void clean() {
 		service = null;
 		text = null;

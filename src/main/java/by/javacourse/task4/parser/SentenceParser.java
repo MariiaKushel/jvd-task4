@@ -9,8 +9,7 @@ import by.javacourse.task4.entity.TextComposite;
 
 public class SentenceParser extends AbstractTextParser {
 
-	private static final String SENTENCE_REGEX = "(\\p{Upper}|[А-ЯЁ]).+?(\\.|\\!|\\?|\\u2026)(\\s|$)"; // \\u2026 =
-																										// '...'
+	private static final String SENTENCE_REGEX = "(\\p{Upper}|[А-ЯЁ]).+?(\\.|\\!|\\?|\\u2026)(\\s|$)"; // \\u2026 = '...'
 
 	public SentenceParser() {
 		this.nextParser = new LexemeParser();

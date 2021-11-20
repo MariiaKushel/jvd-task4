@@ -7,10 +7,10 @@ public interface TextComponent {
 	boolean add(TextComponent component);
 
 	boolean remove(TextComponent component);
-	
+
 	List<TextComponent> getChildren();
-	
-	TextComponent getChildByIndex(int index); //method used for testing
+
+	TextComponent getChildByIndex(int index); // method used for testing
 
 	String toString(); // leading method
 }

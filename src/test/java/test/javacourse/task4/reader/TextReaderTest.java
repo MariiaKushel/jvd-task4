@@ -1,8 +1,8 @@
 package test.javacourse.task4.reader;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import by.javacourse.task4.exception.TextException;
@@ -13,7 +13,7 @@ public class TextReaderTest {
 	
 	private TextReader reader;
 	
-	@BeforeTest
+	@BeforeMethod
 	public void initialize () {
 		reader = new TextReaderImpl();
 	}
@@ -26,6 +26,7 @@ public class TextReaderTest {
 				+ "	It is a long a!=b established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Ipsum is that it has a more-or-less normal distribution ob.toString(a?b:c), as opposed to using (Content here), content here's, making it look like readable English?\r\n"
 				+ "	It is a established fact that a reader will be of a page when looking at its layout...\r\n"
 				+ "	Bye бандерлоги.";
+		
 		Assert.assertEquals(actual, expected);
 	}
 	
@@ -34,6 +35,7 @@ public class TextReaderTest {
 		String pathToFile = "src\\test\\resources\\testData\\textTestEmpty.txt";
 		String actual = reader.read(pathToFile);
 		String expected = "";
+		
 		Assert.assertEquals(actual, expected);
 	}
 	
@@ -43,7 +45,7 @@ public class TextReaderTest {
 		reader.read(pathToFile);
 	}
 
-	@AfterTest
+	@AfterMethod
 	public void clean () {
 		reader = null;
 	}

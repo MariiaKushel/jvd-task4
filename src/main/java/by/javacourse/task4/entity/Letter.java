@@ -17,31 +17,53 @@ public class Letter implements TextComponent {
 
 	@Override
 	public boolean add(TextComponent component) {
-		logger.info("Not available operation to this component");
+		logger.error("Not available operation to this component");
 		throw new UnsupportedOperationException("Not available operation to this component");
 	}
 
 	@Override
 	public boolean remove(TextComponent component) {
-		logger.info("Not available operation to this component");
+		logger.error("Not available operation to this component");
 		throw new UnsupportedOperationException("Not available operation to this component");
 	}
 
 	@Override
 	public List<TextComponent> getChildren() {
-		logger.info("Not available operation to this component");
+		logger.error("Not available operation to this component");
 		throw new UnsupportedOperationException("Not available operation to this component");
 	}
 
 	@Override
 	public TextComponent getChildByIndex(int index) {
-		logger.info("Not available operation to this component");
+		logger.error("Not available operation to this component");
 		throw new UnsupportedOperationException("Not available operation to this component");
 	}
 
 	@Override
 	public String toString() {
 		return String.valueOf(letter);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + letter;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Letter other = (Letter) obj;
+		if (letter != other.letter)
+			return false;
+		return true;
 	}
 
 }
